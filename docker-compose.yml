@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      -  db
+    networks:
+      - multijuegos-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - multijuegos-network
+    volumes:
+      - ./frontend:/app
+    environment:
+      REACT_APP_API_URL: http://localhost.api/
+    
+  db:
+    image: postgres:14
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: multijuegos-amaya
+    ports:
+      - "5432:5432"
+    networks:
+      - multijuegos-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  multijuegos-network:
+    name: multijuegos-network
+    driver: bridge
+
+volumes:
+  pgdata:
