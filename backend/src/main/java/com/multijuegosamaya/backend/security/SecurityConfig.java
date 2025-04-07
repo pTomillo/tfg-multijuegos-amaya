@@ -39,7 +39,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para APIs sin estado (JWT)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sin sesiones
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/authenticate", "/api/register", "/api/public/**").permitAll() // Permitir acceso público
+                        .requestMatchers(
+                                "/api/authenticate",
+                                "/api/register",
+                                "/api/public/**",
+                                "/ws/**",              // WebSocket endpoint
+                                "/chat/**",            // Si usas STOMP con prefijos tipo /chat
+                                "/index.html",
+                                "/favicon.ico",
+                                "/static/**"
+                        ).permitAll() // Permitir acceso público
                         .anyRequest().authenticated() // Exigir autenticación en el resto
                 )
                 .exceptionHandling(exception -> exception
