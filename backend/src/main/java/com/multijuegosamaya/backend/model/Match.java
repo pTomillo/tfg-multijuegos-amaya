@@ -1,11 +1,13 @@
 package com.multijuegosamaya.backend.model;
 
+import com.multijuegosamaya.backend.model.enums.MatchStatus;
 import com.multijuegosamaya.backend.model.enums.MatchType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -46,4 +48,29 @@ public class Match {
     @Enumerated(EnumType.STRING)
     private MatchType matchType = MatchType.PVP;
 
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
+    private List<Round> rounds = new ArrayList<>();
+
+    private String gameKey;
+
+    @Enumerated(EnumType.STRING)
+    private MatchStatus status;
+
+    public void addRound(Round round) {
+        this.rounds.add(round);
+        round.setMatch(this);
+    }
+
+    public void removeRound(Round round) {
+        this.rounds.remove(round);
+        round.setMatch(null);
+    }
+
+    public boolean isFinished() {
+        return this.status == MatchStatus.FINISHED;
+    }
+
+    public boolean hasWinner() {
+        return winner != null;
+    }
 }

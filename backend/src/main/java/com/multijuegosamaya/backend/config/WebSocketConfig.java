@@ -15,8 +15,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // Prefix for the messages send from the client to the server
         registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/user");
+
+        // Prefix for a simple broker that sends the message from the server to the cliente
+        registry.enableSimpleBroker("/topic", "/queue");
+
+        // Prefix for private messaging
         registry.setUserDestinationPrefix("/user");
     }
 }
