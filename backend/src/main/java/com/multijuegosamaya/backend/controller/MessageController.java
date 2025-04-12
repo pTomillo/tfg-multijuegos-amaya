@@ -21,7 +21,7 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping("/conversation/{userId}")
-    public ResponseEntity<List<MessageDTO>> getConversation(@PathVariable Long userId, Principal principal) {
+    public ResponseEntity<List<MessageDTO>> getConversation(@PathVariable Long userId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ResponseEntity.ok(messageService.getConversation(authentication, userId));
     }
