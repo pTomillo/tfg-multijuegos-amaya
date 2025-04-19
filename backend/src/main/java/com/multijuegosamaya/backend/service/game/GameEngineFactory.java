@@ -1,5 +1,6 @@
-package com.multijuegosamaya.backend.service.game.engine;
+package com.multijuegosamaya.backend.service.game;
 
+import com.multijuegosamaya.backend.service.game.engine.GameEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

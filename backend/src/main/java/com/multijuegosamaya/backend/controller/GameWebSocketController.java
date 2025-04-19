@@ -2,7 +2,7 @@ package com.multijuegosamaya.backend.controller;
 
 import com.multijuegosamaya.backend.dto.MoveDTO;
 import com.multijuegosamaya.backend.service.game.engine.GameEngine;
-import com.multijuegosamaya.backend.service.game.engine.GameEngineFactory;
+import com.multijuegosamaya.backend.service.game.GameEngineFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -19,6 +19,7 @@ public class GameWebSocketController {
 
     @MessageMapping("game/move")
     public void handleMove(MoveDTO moveDTO) {
+        System.out.println(moveDTO);
         // Get the adecuate game engine
         GameEngine engine = engineFactory.getGameEngine(moveDTO.getGameKey());
         if(engine != null) {

@@ -1,6 +1,5 @@
 package com.multijuegosamaya.backend.dto;
 
-import com.multijuegosamaya.backend.model.enums.GameStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameStatusDTO {
-    private GameStatus status;
+public class GameSummaryDTO {
+    private Long matchId;
     private String message;
     private PlayerInfoDTO player1;
     private PlayerInfoDTO player2;
+    private int player1Wins;
+    private int player2Wins;
+    private Long winnerId;
 }
