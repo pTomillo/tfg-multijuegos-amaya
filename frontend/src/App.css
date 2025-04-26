@@ -1,42 +1,59 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Paleta de colores personalizados */
+  --color-primary: #1e40af;
+  --color-secondary: #9333ea;
+  --color-accent: #f59e0b;
+  --color-background: var(--color-light-bg);
+  --color-text: var(--color-light-text);
+  --color-muted: var(--color-light-muted);
+  --color-card: var(--color-light-card);
+  --color-border: var(--color-light-border);
+  --color-hover: var(--color-light-hover);
+  --color-button: var(--color-light-button);
+  --color-button-text: var(--color-light-button-text);
+  --color-link: var(--color-light-link);
+  --color-link-hover: var(--color-light-link-hover);
+  --color-shadow: var(--color-light-shadow);
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-warning: #facc15;
+  --color-info: #0ea5e9;
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@layer base {
+  :root {
+    /* Colores para el modo claro */
+    --color-light-bg: #ffffff;
+    --color-light-text: #1f2937;
+    --color-light-muted: #6b7280;
+    --color-light-card: #f9fafb;
+    --color-light-border: #e5e7eb;
+    --color-light-hover: #f3f4f6;
+    --color-light-button: #1e40af;
+    --color-light-button-text: #ffffff;
+    --color-light-link: #2563eb;
+    --color-light-link-hover: #1d4ed8;
+    --color-light-shadow: rgba(0, 0, 0, 0.1);
   }
-  to {
-    transform: rotate(360deg);
+
+  .dark {
+    /* Colores para el modo oscuro */
+    --color-light-bg: #1f2937;
+    --color-light-text: #f9fafb;
+    --color-light-muted: #9ca3af;
+    --color-light-card: #374151;
+    --color-light-border: #4b5563;
+    --color-light-hover: #4b5563;
+    --color-light-button: #2563eb;
+    --color-light-button-text: #ffffff;
+    --color-light-link: #3b82f6;
+    --color-light-link-hover: #60a5fa;
+    --color-light-shadow: rgba(255, 255, 255, 0.1);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
