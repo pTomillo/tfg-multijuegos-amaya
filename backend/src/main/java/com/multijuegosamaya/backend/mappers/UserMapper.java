@@ -2,7 +2,9 @@ package com.multijuegosamaya.backend.mappers;
 
 import com.multijuegosamaya.backend.dto.UserDTO;
 import com.multijuegosamaya.backend.model.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserMapper {
 
     public static UserDTO toUserDTO(User user) {

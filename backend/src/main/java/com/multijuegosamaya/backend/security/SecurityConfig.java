@@ -47,6 +47,7 @@ public class SecurityConfig {
                                 "/chat/**",            // Si usas STOMP con prefijos tipo /chat
                                 "/index.html",
                                 "/favicon.ico",
+                                "/uploads/**",
                                 "/static/**"
                         ).permitAll() // Permitir acceso público
                         .anyRequest().authenticated() // Exigir autenticación en el resto
