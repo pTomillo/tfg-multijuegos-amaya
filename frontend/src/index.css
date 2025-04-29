@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
@@ -28,6 +27,7 @@
   :root {
     /* Variables para modo claro */
     --color-background: #ffffff;
+    --color-navbar: #f1f5f9;
     --color-textPrimary: #111827;
     --color-textSecondary: #6b7280;
     --color-card: #f9fafb;
@@ -43,6 +43,7 @@
   .dark {
     /* Variables para modo oscuro */
     --color-background: #0f172a;
+    --color-navbar: #1e293b;
     --color-textPrimary: #f9fafb;
     --color-textSecondary: #9ca3af;
     --color-card: #1e293b;
