@@ -4,6 +4,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import RegisterPage from "../pages/Register/RegisterPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import Layout from "../layout/Layout";
+import FriendsPage from "../pages/Friends/FriendsPage";
 
 export default function AppRouter() {
   return (
@@ -13,6 +14,7 @@ export default function AppRouter() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="friends" element={<FriendsPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Routes>

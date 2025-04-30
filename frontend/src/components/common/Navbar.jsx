@@ -73,7 +73,13 @@ export default function Navbar() {
                 className="focus:outline-none"
               >
                 <img
-                  src={`http://localhost:8080${userData?.profilePicture}`}
+                  src={
+                    userData?.profilePicture
+                      ? `${import.meta.env.VITE_MEDIA_URL}${
+                          userData.profilePicture
+                        }`
+                      : "/default_avatar.png"
+                  }
                   alt="Perfil"
                   className="h-10 w-10 rounded-full border border-white"
                 />
@@ -83,7 +89,13 @@ export default function Navbar() {
                 <div className="absolute right-0 mt-2 w-56 bg-[var(--color-card)] shadow-lg rounded-lg p-4 space-y-4 z-50">
                   <div className="flex items-center gap-3">
                     <img
-                      src={`http://localhost:8080${userData?.profilePicture}`}
+                      src={
+                        userData?.profilePicture
+                          ? `${import.meta.env.VITE_MEDIA_URL}${
+                              userData.profilePicture
+                            }`
+                          : "/default_avatar.png"
+                      }
                       alt="Perfil"
                       className="h-10 w-10 rounded-full border"
                     />

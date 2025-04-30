@@ -34,7 +34,7 @@ export default function ProfilePage() {
           <img
             src={
               userData?.profilePicture
-                ? `http://localhost:8080${userData.profilePicture}`
+                ? `${import.meta.env.VITE_MEDIA_URL}${userData.profilePicture}`
                 : "/default_avatar.png"
             }
             alt="Avatar"
