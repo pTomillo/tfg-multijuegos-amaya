@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import apiClient from "../../api/apiClient";
 import { AuthContext } from "../../context/AuthContext";
@@ -5,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function FriendList() {
   const { userId } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
+  const navigate = useNavigate(); // ← añadido
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -48,12 +50,15 @@ export default function FriendList() {
             <span className="font-medium">{friend.username}</span>
           </div>
           <div className="flex gap-2">
-            <button className="bg-blue-500 text-white px-3 py-1 rounded">
+            <button
+              onClick={() => navigate(`/chat/${friend.id}`)}
+              className="bg-blue-500 text-white px-3 py-1 rounded hover:brightness-110"
+            >
               Enviar Mensaje
             </button>
             <button
               onClick={() => handleUnfriend(friend.id)}
-              className="bg-red-500 text-white px-3 py-1 rounded"
+              className="bg-red-500 text-white px-3 py-1 rounded hover:brightness-110"
             >
               Dejar de ser amigos
             </button>

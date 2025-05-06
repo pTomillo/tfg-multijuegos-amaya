@@ -61,7 +61,7 @@ public class MatchController {
         return ResponseEntity.ok(MatchMapper.toDTO(createdMatch));
     }
 
-    @PostMapping("/{matchId}/join")
+    @PutMapping("/{matchId}/join")
     public ResponseEntity<MatchInfoDTO> joinMatch(@PathVariable("matchId") Long matchId) {
 
         // Find the player that is making the petition
@@ -71,6 +71,13 @@ public class MatchController {
 
         // Find the match in the DB
         Match match = matchRepository.findById(matchId).orElseThrow(() -> new RuntimeException("Match not found"));
+
+        if (
+                match.getPlayer1() != null && match.getPlayer1().getId().equals(player2Id) ||
+                        (match.getPlayer2() != null && match.getPlayer2().getId().equals(player2Id))
+        ) {
+            return ResponseEntity.ok(MatchMapper.toDTO(match));
+        }
 
         // Check that the match is still pending and doesnt have a sencond player
         if (match.getStatus() != (MatchStatus.PENDING) || match.getPlayer2() != null) {
@@ -94,6 +101,12 @@ public class MatchController {
                 match.getPlayer2().getUsername(),
                 match.getPlayer2().getProfilePicture()
         );
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         // Send the message that starts the match
         GameStatusDTO startMsg = new GameStatusDTO(

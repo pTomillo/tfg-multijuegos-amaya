@@ -50,9 +50,9 @@ public class MessageService {
         MessageDTO response = MessageMapper.toDTO(message);
 
         // Send the message to the recipient via websocket
-        messagingTemplate.convertAndSendToUser(
-                recipient.getUsername(),
-                "/queue/messages",
+        // Enviar a un canal público específico para el userId
+        messagingTemplate.convertAndSend(
+                "/topic/messages/" + recipient.getId(),
                 response
         );
         return response;

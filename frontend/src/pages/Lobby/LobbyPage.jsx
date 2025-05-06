@@ -49,16 +49,10 @@ export default function LobbyPage() {
 
   const handleJoinRoom = async (roomId) => {
     try {
-      const response = await apiClient.post(`/match/${roomId}/join`, userId, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const match = response.data;
-      localStorage.setItem("matchId", match.id);
-      navigate(`/match/${match.id}`);
+      // ⚠️ ¡NO HACEMOS JOIN AQUÍ!
+      navigate(`/match/${roomId}`);
     } catch (error) {
-      console.error("Error al unirse a la sala:", error);
+      console.error("Error al navegar a la sala:", error);
     }
   };
 

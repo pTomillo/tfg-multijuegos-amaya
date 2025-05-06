@@ -13,9 +13,11 @@
     "@stomp/stompjs": "^7.1.1",
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.9.0",
+    "buffer": "^6.0.3",
     "classnames": "^2.5.1",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.503.0",
+    "process": "^0.11.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
@@ -23,6 +25,7 @@
     "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@eslint/js": "^9.21.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

@@ -7,6 +7,8 @@ import Layout from "../layout/Layout";
 import FriendsPage from "../pages/Friends/FriendsPage";
 import GamesPage from "../pages/Games/GamesPage";
 import LobbyPage from "../pages/Lobby/LobbyPage";
+import ChatPage from "../pages/Chat/ChatPage";
+import MatchPage from "../pages/Match/MatchPage";
 
 export default function AppRouter() {
   return (
@@ -20,6 +22,8 @@ export default function AppRouter() {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="games" element={<GamesPage />} />
           <Route path="/games/:gameId/lobby" element={<LobbyPage />} />
+          <Route path="/chat/:recipientId" element={<ChatPage />} />
+          <Route path="/match/:matchId" element={<MatchPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
