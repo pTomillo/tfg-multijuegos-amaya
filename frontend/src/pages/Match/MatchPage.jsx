@@ -24,24 +24,10 @@ export default function MatchPage() {
     stompClient.current.connect({}, async () => {
       stompClient.current.subscribe(`/topic/game/${matchId}`, (msg) => {
         const data = JSON.parse(msg.body);
-        console.log("Mensaje WS recibido:", data);
 
-        const numericUserId = parseInt(userId);
-
-        if (
-          data.status === "START" &&
-          data.player1?.id != null &&
-          data.player2?.id != null
-        ) {
-          const isPlayer1 = data.player1.id === numericUserId;
-
-          console.log("User ID:", numericUserId);
-          console.log("Player1 ID:", data.player1.id);
-          console.log("Player2 ID:", data.player2.id);
-          console.log(
-            "Asignando playerInfo:",
-            isPlayer1 ? "player1" : "player2"
-          );
+        // Mensaje de inicio de partida
+        if (data.status === "START") {
+          const isPlayer1 = data.player1.id === userId;
 
           const fixedPlayer1 = {
             ...data.player1,
@@ -56,12 +42,13 @@ export default function MatchPage() {
 
           setPlayerInfo(isPlayer1 ? fixedPlayer1 : fixedPlayer2);
           setOpponentInfo(isPlayer1 ? fixedPlayer2 : fixedPlayer1);
-          setIsWaiting(false);
           setGameStarted(true);
+          setIsWaiting(false);
         }
 
-        if (data.result || data.message || data.winnerId != null) {
-          setGameData(data);
+        // Mensajes de juego posteriores (resumen final)
+        if (data.winnerId !== undefined && data.player1Wins !== undefined) {
+          setGameData(data); // Se lo pasamos al GameComponent
         }
       });
 
@@ -91,7 +78,7 @@ export default function MatchPage() {
         </div>
       )}
 
-      {gameStarted && playerInfo?.id && opponentInfo?.id && (
+      {gameStarted && playerInfo && opponentInfo && (
         <GameComponent
           matchId={parseInt(matchId)}
           player={playerInfo}

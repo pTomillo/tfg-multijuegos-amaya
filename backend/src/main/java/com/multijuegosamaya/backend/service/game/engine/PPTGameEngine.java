@@ -80,9 +80,25 @@ public class PPTGameEngine implements GameEngine {
         match.addRound(round);
         matchRepository.save(match);
 
-        // Send the result to both players
-        messagingTemplate.convertAndSend("/topic/game/" + matchId, new GameResultDTO(players[0], move1, result1));
-        messagingTemplate.convertAndSend("/topic/game/" + matchId, new GameResultDTO(players[1], move2, result2));
+        String roundMessage;
+        if (winnerId == null) {
+            roundMessage = "Empate en esta ronda.";
+        } else if (winnerId.equals(players[0])) {
+            roundMessage = "¡" + match.getPlayer1().getUsername() + " ganó la ronda!";
+        } else {
+            roundMessage = "¡" + match.getPlayer2().getUsername() + " ganó la ronda!";
+        }
+
+        GameResultDTO roundResult = GameResultDTO.builder()
+                .player1Id(players[0])
+                .player2Id(players[1])
+                .movePlayer1(move1)
+                .movePlayer2(move2)
+                .winnerId(winnerId)
+                .message(roundMessage)
+                .build();
+
+        messagingTemplate.convertAndSend("/topic/game/" + matchId, roundResult);
 
         // Clean the moves of this round
         matchmoves.remove(matchId);
