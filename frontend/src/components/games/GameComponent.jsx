@@ -39,7 +39,7 @@ export default function GameComponent({
       `/topic/game/${matchId}`,
       (msg) => {
         const body = JSON.parse(msg.body);
-        console.log("📩 WS recibido en GameComponent:", body);
+        console.log("WS recibido en GameComponent:", body);
 
         if (
           body.status === "WAITING" &&
@@ -49,7 +49,7 @@ export default function GameComponent({
           setWaiting(true);
         }
 
-        // ✅ Rondas
+        // Rondas
         if (body.movePlayer1 && body.movePlayer2) {
           const tuId = Number(userId);
           const {
@@ -74,18 +74,15 @@ export default function GameComponent({
             tuMovimiento = movePlayer2;
             rivalMovimiento = movePlayer1;
           } else {
-            console.warn(
-              "⚠️ userId no coincide con ninguno de los jugadores:",
-              {
-                tuId,
-                player1IdNum,
-                player2IdNum,
-              }
-            );
+            console.warn("userId no coincide con ninguno de los jugadores:", {
+              tuId,
+              player1IdNum,
+              player2IdNum,
+            });
             return;
           }
 
-          console.log("🧠 Jugadas interpretadas:", {
+          console.log("Jugadas interpretadas:", {
             tuMovimiento,
             rivalMovimiento,
             tuId,
@@ -107,7 +104,6 @@ export default function GameComponent({
           setWaiting(false);
         }
 
-        // 🏁 Fin de partida
         if (
           body.matchId != null &&
           body.player1 &&
@@ -115,7 +111,6 @@ export default function GameComponent({
           typeof body.player1Wins === "number" &&
           typeof body.player2Wins === "number"
         ) {
-          console.log("🎯 Mensaje de resumen final recibido:", body);
           setGameOver(true);
           setWaiting(true);
           setSummary(body.message || "Partida finalizada.");
@@ -129,7 +124,7 @@ export default function GameComponent({
 
   const submitMove = () => {
     const move = moves[selectedMoveIndex];
-    console.log("📤 Enviando jugada:", move);
+    console.log("Enviando jugada:", move);
     stompClient.current.send(
       "/app/game/move",
       {},

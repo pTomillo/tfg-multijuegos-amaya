@@ -22,10 +22,10 @@ services:
       - backend
     networks:
       - multijuegos-network
-    volumes:
-      - ./frontend:/app
     environment:
-      REACT_APP_API_URL: http://localhost.api/
+      VITE_API_URL: http://localhost:8080/api
+      VITE_MEDIA_URL: http://localhost:8080/api
+      VITE_WS_URL: http://localhost:8080/api
 
   db:
     image: postgres:14

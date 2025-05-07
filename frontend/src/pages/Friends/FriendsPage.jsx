@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FriendList from "../../components/friends/FriendList";
-import FriendRequests from "../../components/friends/FriendRequests";
+import FriendList from "../../components/Friends/FriendList";
+import FriendRequests from "../../components/Friends/FriendRequests";
 import UserSearch from "../../components/Friends/UserSearch";
 
 export default function FriendsPage() {
